@@ -28,7 +28,9 @@
                 <td>{{this.status}}</td>
                 <td>{{this.duration}}</td>
                 <td>
-                  <a href="{{this.recording_url}}">Click to listen</a>
+                  {{#if this.recording_url}}
+                  <a href="{{this.recording_url}}" target="_blank">Click to listen</a>
+                  {{/if}}
                 </td> 
                 <td>{{this.created_at}}</td> 
               </tr>
