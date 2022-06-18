@@ -10,6 +10,7 @@ import { RecordingDto } from './RecordingDto';
 export class CallsService {
     constructor(@InjectRepository(Call) private callRepository: Repository<Call>) { }
 
+    //Method to gather phone's keypad input
     gather(twiml) {
       const gatherNode = twiml.gather({ numDigits: 1 });
       gatherNode.say('For customer service representative, press 1. For voicemail, press 2.');
