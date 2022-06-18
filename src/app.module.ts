@@ -8,11 +8,10 @@ import { CallsModule } from './calls/calls.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'twillio_demo',
+      host: 'us-cdbr-east-05.cleardb.net',
+      username: 'b54f5d594aa91d',
+      password: 'd0d2d0d4',
+      database: 'heroku_87dac6eb6d58a87',
       entities: [Call],
       synchronize: false,
       dropSchema: false
