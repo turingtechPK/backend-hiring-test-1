@@ -13,8 +13,8 @@ import { CallsModule } from './calls/calls.module';
       password: 'd0d2d0d4',
       database: 'heroku_87dac6eb6d58a87',
       entities: [Call],
-      synchronize: true,
-      dropSchema: true
+      synchronize: false,
+      dropSchema: false
     }
   ), CallsModule],
   controllers: [AppController],
