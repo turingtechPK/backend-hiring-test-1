@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Twilio Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-2">
+        <div class="col-12">
+          <table class="table table-light">
+            <thead>
+              <th>Call Sid</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Recording URL</th>
+              <th>Date and Time</th>
+            </thead>
+            <tbody>
+              {{#each callsList}}
+              <tr>
+                <td>{{this.call_sid}}</td>
+                <td>{{this.from}}</td>
+                <td>{{this.to}}</td>
+                <td>{{this.status}}</td>
+                <td>{{this.duration}}</td>
+                <td>{{this.recording_url}}</td> 
+                <td>{{this.created_at}}</td> 
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
