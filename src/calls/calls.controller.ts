@@ -37,8 +37,7 @@ export class CallsController {
     }
   
     @Get('/test-db')
-    async testDb(@Response() res) {
-      return process.env;
+    async testDb(@Response() res) {      
       const response = await this.callsService.testDb();
       // return response;
       return res.send(response);

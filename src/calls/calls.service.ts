@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Call } from './calls.entity';
 import { InboudCallDto } from './InboundCallDto';
 import { RecordingDto } from './RecordingDto';
+import 'dotenv/config';
 
 @Injectable()
 export class CallsService {
@@ -38,7 +39,7 @@ export class CallsService {
       if (inboudCall.Digits) {
         switch (inboudCall.Digits) {
           case '1':
-            twiml.dial('+923327819342');
+            twiml.dial(process.env.CALLING_NUMBER);
             twiml.say('Goodbye');
             break;
           case '2':
@@ -46,7 +47,7 @@ export class CallsService {
             twiml.record({
               recordingStatusCallbackEvent: ['completed'],
               recordingStatusCallbackMethod: 'POST',
-              recordingStatusCallback: 'https://evening-refuge-01387.herokuapp.com/calls/recording',
+              recordingStatusCallback: process.env.RECORDING_CALLBACK,
             });
             twiml.hangup();
             break;
@@ -88,6 +89,7 @@ export class CallsService {
     }
   
     async testDb() {
+      return process.env.RECORDING_CALLBACK + "-----" + process.env.CALLING_NUMBER;
       const twiml = new VoiceResponse();
       console.log(twiml);
       return true;
