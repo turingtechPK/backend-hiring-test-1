@@ -45,7 +45,7 @@ export class CallsService {
             twiml.record({
               recordingStatusCallbackEvent: ['completed'],
               recordingStatusCallbackMethod: 'POST',
-              recordingStatusCallback: 'https://9251-111-88-98-26.ap.ngrok.io/calls/recording',
+              recordingStatusCallback: 'https://evening-refuge-01387.herokuapp.com/calls/recording',
             });
             twiml.hangup();
             break;
