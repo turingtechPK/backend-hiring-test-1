@@ -1,0 +1,44 @@
+name: deploy-to-staging
+on:
+  push:
+    branches:
+      # When someone push to `ali-test` branch
+      - ali-test
+
+jobs:
+  lint_and_build:
+    uses: ./.github/workflows/ci.yml
+  deploy:
+    concurrency: 
+      group: ${{ github.ref }}
+    needs: lint_and_build
+    name: "Deploy to Dev"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/ali-test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+
+      - name: Pull the latest code to the staging environment
+        run: ssh staging 'cd backend-hiring-test-1 && git pull'
+
+      - name: Start containers
+        run: |
+          ssh staging 'cd backend-hiring-test-1 && bash scripts/start_server.sh'
+      - name: Test the App
+        run: |
+          ssh staging 'if [ $( docker ps -a | grep turing | wc -l ) -gt 0 ]; then  echo "turing exists"; else   echo "turing does not exist" && raise error; fi'
