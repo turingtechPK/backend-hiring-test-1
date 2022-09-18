@@ -17,23 +17,10 @@ services:
       target: backend
     env_file:
     - .env
-    container_name: tc-app
+    container_name: turing
     depends_on:
       - db
   
-  client:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      target: client
-    env_file:
-      - ./.env
-    container_name: tc-client
-    volumes:
-      - shm:/dev/shm
-    depends_on:
-      - app
-
   nginx:
     build:
       context: ./production

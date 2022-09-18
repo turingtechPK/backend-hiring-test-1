@@ -3,7 +3,6 @@ import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@src/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as cookieParser from 'cookie-parser';
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { ValidationPipe } from '@nestjs/common';
@@ -15,13 +14,11 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(new ValidationPipe());
-  app.use(cookieParser());
 
   const config = new DocumentBuilder()
-    .setTitle('Talent Cities')
-    .setDescription('The Talent Cities API description')
+    .setTitle('Twilio Backend Test')
+    .setDescription('API description')
     .setVersion('1.0')
-    .addTag('talent-cities')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   writeFileSync(
@@ -41,6 +38,7 @@ async function bootstrap() {
           'connect-src': ["'self'"],
           'script-src': ["'self'", "'unsafe-inline'"],
           'img-src': ["'self'", 'https: data: blob:'],
+          'media-src': ['api.twilio.com']
         },
       },
     }),
