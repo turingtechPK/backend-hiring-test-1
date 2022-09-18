@@ -2,8 +2,8 @@ name: deploy-to-staging
 on:
   push:
     branches:
-      # When someone push to `ali-test` branch
-      - ali-test
+      # When someone push to `main` branch
+      - main
 
 jobs:
   lint_and_build:
@@ -13,7 +13,7 @@ jobs:
       group: ${{ github.ref }}
     needs: lint_and_build
     name: "Deploy to Dev"
-    if: github.event_name == 'push' && github.ref == 'refs/heads/ali-test'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH
