@@ -14,7 +14,6 @@ function TwilioData() {
           <tr>
             <th>CallSid</th>
             <th>CallStatus</th>
-            <th>Caller</th>
             <th>From</th>
             <th>Duration</th>
             <th>Recording</th>
