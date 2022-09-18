@@ -1,0 +1,50 @@
+version: "3.4"
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    env_file:
+      - ./db/env.db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: backend
+    env_file:
+    - .env
+    container_name: tc-app
+    depends_on:
+      - db
+  
+  client:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: client
+    env_file:
+      - ./.env
+    container_name: tc-client
+    volumes:
+      - shm:/dev/shm
+    depends_on:
+      - app
+
+  nginx:
+    build:
+      context: ./production
+      dockerfile: nginx.Dockerfile
+    restart: always
+    ports:
+      - 8001:80
+    depends_on:
+      - app
+
+  
+volumes:
+  pgdata:
+  shm:
