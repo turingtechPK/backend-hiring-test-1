@@ -27,7 +27,7 @@ export class CallsService {
       }).save();
       const gather = response.gather({
         numDigits: 1,
-        action: '/calls/inbound',
+        action: '/calls/callInprogress',
         method: 'POST',
       });
       gather.say(
@@ -52,7 +52,7 @@ export class CallsService {
       switch (body.Digits) {
         case '1':
           response.say(' Forwarding call');
-          response.redirect('/calls/forwarding');
+          response.redirect('/calls/callForwarding');
           break;
         case '2':
           response.say(' Voice message is selected');

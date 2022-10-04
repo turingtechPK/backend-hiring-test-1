@@ -7,33 +7,33 @@ import { Observable } from 'rxjs';
 export class CallsController {
   constructor(private CallsService: CallsService) {}
 
-  @Get('allRecords')
-  allrecords(): any {
+  @Get()
+  allrecords(): Promise<Records[]> {
     return this.CallsService.getAllRecords();
   }
-
-  @Post('inbound')
-  inbound(@Body() body): any {
-    return this.CallsService.inbound(body);
-  }
-  @Post('callSetup')
-  callsetup(@Body() body: createRecordDto): any {
+  @Post()
+  callSetup(@Body() body: createRecordDto) {
     return this.CallsService.setup(body);
   }
+  @Post('callInprogress')
+  inProgress(@Body() body) {
+    return this.CallsService.inbound(body);
+  }
+
   @Post('saveCall')
-  saverecords(@Body() body: createRecordDto): any {
+  saveRecords(@Body() body: createRecordDto) {
     return this.CallsService.saveCall(body);
   }
   @Post('saveVoice')
-  savevoice(@Body() body: createRecordDto): any {
+  saveVoice(@Body() body: createRecordDto) {
     return this.CallsService.saveVoice(body);
   }
-  @Get('forwarding')
-  forwarding(): any {
+  @Get('callForwarding')
+  callForwarding() {
     return this.CallsService.callForwarding();
   }
   @Get('recordVoice')
-  recordvoice(): any {
+  recordVoice() {
     return this.CallsService.recordVoice();
   }
 }
