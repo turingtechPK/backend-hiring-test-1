@@ -93,6 +93,6 @@ routes(app);
 const PORT = 3000;
 
 // Create an HTTP server and listen for requests on port 3000
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log("Now listening on port 3000. ");
 });
