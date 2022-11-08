@@ -12,7 +12,6 @@ exports.voice = asyncMiddleware(async (request, response) => {
     numDigits: 1,
     action: "/api/twilio/gather",
   });
-  // console.log({ gather: gather?.gather });
   gather.say(messages.TWILIO_CALL_WELCOME_MSG);
   twiml.redirect("/api/twilio/voice");
 
