@@ -1,0 +1,51 @@
+{
+  "root": true,
+  "ignorePatterns": ["dist", "coverage", "node_modules"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "plugins": ["jsdoc"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["jsdoc"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:jsdoc/recommended",
+        "plugin:node/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "jsdoc/require-jsdoc": [
+          "error",
+          {
+            "require": {
+              "ArrowFunctionExpression": true,
+              "ClassExpression": true,
+              "FunctionDeclaration": true,
+              "MethodDefinition": true
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-param-description": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "jsdoc/require-description": "error",
+        "jsdoc/require-returns": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "node/no-unsupported-features/es-syntax": "off",
+        "node/no-missing-import": "off",
+        "quotes": [2, "single", { "avoidEscape": true }],
+        "object-shorthand": "error"
+      }
+    }
+  ]
+}
