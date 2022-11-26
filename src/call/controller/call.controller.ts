@@ -78,8 +78,6 @@ export async function statusChange(
 ): Promise<express.Response> {
   try {
     await callService.statusChange(req.body);
-    // Render the response as XML in reply to the webhook request
-    res.type("text/xml");
     return res.status(200).send();
   } catch (err) {
     console.error(
