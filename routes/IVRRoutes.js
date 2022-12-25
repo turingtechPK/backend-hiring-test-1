@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {callStart,assistance,AddCallLog,RetrieveCalLogs,CustomerSupport} =require("../Controller/IVRController");
 
+///all routes defined
 router.post("/start",callStart);
 router.post("/assistance",assistance);
 router.post("/addCallLog",AddCallLog);
