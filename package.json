@@ -1,0 +1,27 @@
+{
+  "name": "backend-hiring-test-1",
+  "version": "1.0.0",
+  "description": "This test is a part of our hiring process for [backend positions](https://www.turingtechnologies.org/careers). It should take you between 2 and 4 hours depending on your experience. We made this task in a way that you'll end up learing how IVRs and Twilio's API works. Working on this task will help you in your future projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turingtechPK/backend-hiring-test-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/turingtechPK/backend-hiring-test-1/issues"
+  },
+  "homepage": "https://github.com/turingtechPK/backend-hiring-test-1#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.1",
+    "nodemon": "^2.0.20",
+    "twilio": "^3.84.0"
+  }
+}
