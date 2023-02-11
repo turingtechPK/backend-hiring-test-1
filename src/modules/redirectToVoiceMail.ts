@@ -1,5 +1,7 @@
 import VoiceResponse from "twilio/lib/twiml/VoiceResponse";
 
+// A Simple Module That Redirects to VoiceMail
+
 export default function redirectToVoiceMail() {
 	const voiceResponse = new VoiceResponse();
 

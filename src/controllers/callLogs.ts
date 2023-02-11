@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Call from "../modules/Call";
 
+// A Simple Funcation That Returns Call Logs
 
 export default async function callLogs(req: Request, res: Response) {
 	const calls = await Call.fetchLogs();

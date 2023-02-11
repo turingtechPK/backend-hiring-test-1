@@ -3,6 +3,8 @@ import forwardCall from "../modules/forwardCall";
 import redirectToVoiceMail from "../modules/redirectToVoiceMail";
 import redirectToWelcome from "../modules/redirectToWelcome";
 
+// A Simple Handler for Menu Items That works As Per Requirements
+
 export default function menu(req: Request, res: Response) {
 	const digit: String = req.body.Digits;
 

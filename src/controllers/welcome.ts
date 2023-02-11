@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
+// A Simple IRV Welcome Page
+
 const welcome = function welcome(req: Request, res: Response) {
 	const voiceResponse = new VoiceResponse();
-	// res.json("yes yes")
-	console.log('welcoming');
 	const gather = voiceResponse.gather({
 		action: '/call/menu',
 		numDigits: '1',
