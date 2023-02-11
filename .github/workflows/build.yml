@@ -1,0 +1,19 @@
+name: Client Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 16.15.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.15.0
+      - name: Install Node modules
+        run: npm ci
+      - name: Run Build
+        run: npm run build
