@@ -1,9 +1,11 @@
-const VoiceResponse = require('twilio').twiml.VoiceResponse;
+import VoiceResponse from "twilio/lib/twiml/VoiceResponse";
 
 export default function redirectToVoiceMail() {
-	const twiml = new VoiceResponse();
+	const voiceResponse = new VoiceResponse();
 
-    twiml.say("Please Record Your Message After the Beep.");
-    twiml.record();
-    return twiml.toString();
+    voiceResponse.say("Please Record Your Message After the Beep.");
+
+    voiceResponse.record();
+
+    return voiceResponse.toString();
 };

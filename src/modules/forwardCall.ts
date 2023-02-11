@@ -1,11 +1,11 @@
-const VoiceResponse = require('twilio').twiml.VoiceResponse;
+import VoiceResponse from "twilio/lib/twiml/VoiceResponse";
 
 export default function forwardCall() {
-	const response = new VoiceResponse();
+	const voiceResponse = new VoiceResponse();
 
-    response.say("Redirecting Call");
-    response.dial("+923409140288", {
-		action: "/call/endcall",
-	});
-    return response.toString();
+    voiceResponse.say("Redirecting Call");
+
+    voiceResponse.dial("+923409140288");
+
+    return voiceResponse.toString();
 };
