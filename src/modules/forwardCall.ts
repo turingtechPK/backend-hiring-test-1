@@ -5,7 +5,7 @@ export default function forwardCall() {
 
     voiceResponse.say("Redirecting Call");
 
-    voiceResponse.dial("+923409140288");
+    voiceResponse.dial("00923409140288");
 
     return voiceResponse.toString();
 };
