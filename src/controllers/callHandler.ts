@@ -13,7 +13,6 @@ const callHandler = async (req: Request, res: Request) => {
 	const callDetails = await client
 		.calls(CallSid)
 		.fetch();
-	console.log(callDetails,'yes yes');
 
 	return Call.add({
 		sid: CallSid,
