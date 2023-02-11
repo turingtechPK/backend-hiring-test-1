@@ -4,7 +4,7 @@ dotenv.config()
 import { urlencoded } from 'body-parser';
 import Express, { Request, Response } from 'express';
 const app = Express()
-const port = 3000;
+const port = process.env.PORT || 3000;
 import callRouter from './routes/call'
 import cookieParser from 'cookie-parser';
 import callHandler from './controllers/callHandler';
@@ -17,5 +17,5 @@ app.get('/', (req: Request, res: Response) => {
 })
 app.use("/call", callRouter);
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
+	console.log(`Twilio IRV listening on port ${port}`)
 })
