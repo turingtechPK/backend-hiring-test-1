@@ -9,5 +9,12 @@ const add = async (CallData : ICall) => {
 	await call.save();
 }
 
-export default { add }
+const fetchLogs = async () => {
+	await connect(process.env.MONGO_DB_URI || "");
+
+	const calls = await Call.find({});
+	return calls;
+}
+
+export default { add, fetchLogs }
 
