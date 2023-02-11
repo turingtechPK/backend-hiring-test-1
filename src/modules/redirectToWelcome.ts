@@ -1,4 +1,3 @@
-// const VoiceResponse = require('twilio').twiml.VoiceResponse;
 import VoiceResponse from "twilio/lib/twiml/VoiceResponse";
 
 // A Simple Module That Redirects to the Welcome Page Upon Invalid Response
