@@ -35,8 +35,11 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
     // Use the Twilio Node.js SDK to build an XML response
     const twiml = new VoiceResponse();
 
-    let calls = new Calls(req.body);
-    await calls.save();
+    let call = await Calls.findOne({CallSid: req.body.CallSid}); //due to forwarding call added this check to avoid multi cal records
+    if(!call){
+        let calls = new Calls(req.body);
+        await calls.save();
+    }
 
     /** helper function to set up a <Gather> */
     function gather() {
