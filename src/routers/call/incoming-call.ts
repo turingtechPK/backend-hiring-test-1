@@ -8,12 +8,8 @@ const router = express.Router();
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 // Auth keys from env
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-const ngrokURL = 'https://backend-hiring-test-1-production.up.railway.app';
 const forwardNumber = process.env.TWILIO_PHONE_NUMBER;
-// const client = require('twilio')(accountSid, authToken);
-
+const liveURL = 'https://backend-hiring-test-1-production.up.railway.app';
 
 interface ReqType {
     body: {
@@ -58,7 +54,7 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                 //Forward call
                 twiml.say('Your call is being forwaded');
                 twiml.dial({
-                    action: ngrokURL + '/call/forward_call',
+                    action: liveURL + '/call/forward_call',
                     method: 'GET'
                 }, forwardNumber);
                 break;
@@ -66,7 +62,7 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                 //Record a voicemail
                 twiml.say('Please leave a message at the beep.\nPress the star key when finished.');
                 twiml.record({
-                    action: ngrokURL + '/call/handle_recording',
+                    action: liveURL + '/call/handle_recording',
                     method: 'GET',
                     maxLength: 20,
                     finishOnKey: '*'
