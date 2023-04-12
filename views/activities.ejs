@@ -1,0 +1,51 @@
+<table class="table">
+    <caption>Voicemail calls</caption>
+    <thead>
+      <tr>
+        <th scope="col">CallSid</th>
+        <th scope="col">CallStatus</th>
+        <th scope="col">Digits</th>
+        <th scope="col">RecordingDuration</th>
+        <th scope="col">RecordingSid</th>
+        <th scope="col">RecordingUrl</th>
+
+      </tr>
+    </thead>
+    <tbody>
+     <% for (item of voicemailCalls) { %>
+      <tr>
+        <th scope="row"> <%= item._doc.CallSid %></th>
+        <th scope="row"> <%= item._doc.CallStatus %></th>
+        <th scope="row"> <%= item._doc.Digits %></th>
+        <th scope="row"> <%= item._doc.RecordingDuration %></th>
+        <th scope="row"> <%= item._doc.RecordingSid %></th>
+        <th scope="row"><a href="<%= item._doc.RecordingUrl %>" target="_blank">link</a> </th>
+
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+<br>
+<br>
+<table class="table">
+    <caption>forwardedCalls calls</caption>
+    <thead>
+      <tr>
+        <th scope="col">CallSid</th>
+        <th scope="col">CallStatus</th>
+        <th scope="col">Forwarded To</th>
+
+      </tr>
+    </thead>
+    <tbody>
+     <% for (item of forwardedCalls) { %>
+      <tr>
+        <th scope="row"> <%= item._doc.CallSid %></th>
+        <th scope="row"> <%= item._doc.CallStatus %></th>
+        <th scope="row"> <%= item._doc.To %></th>
+
+      </tr>
+      <% } %>
+    </tbody>
+  </table>

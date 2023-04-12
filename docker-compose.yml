@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: twilo_turing
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  app:
+    build: .
+    restart: always
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongodb:27017/twilo_turing
+      TWILIO_PHONE_NUMBER: +15074106840
+      NGROK_URL: https://1b84-39-41-207-231.ngrok-free.app
+    ports:
+      - "8080:3000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:

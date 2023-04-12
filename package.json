@@ -1,0 +1,34 @@
+{
+  "name": "backend_hiring_test_1",
+  "version": "1.0.0",
+  "description": "Turing Tech Test",
+  "main": "app.ts",
+  "scripts": {
+    "test": "npm run test",
+    "start": "nodemon --exec npx ts-node app.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukash/backend-hiring-test-1.git"
+  },
+  "author": "Mukash Wasti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mukash/backend-hiring-test-1/issues"
+  },
+  "homepage": "https://github.com/mukash/backend-hiring-test-1#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongodb": "^5.2.0",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22",
+    "twilio": "^4.10.0",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11"
+  }
+}
