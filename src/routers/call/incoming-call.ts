@@ -58,8 +58,6 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                     action: ngrokURL + '/call/forward_call',
                     method: 'GET'
                 }, forwardNumber);
-                // End the call with <Hangup>
-                twiml.hangup();
                 break;
             case '2':
                 //Record a voicemail
@@ -70,8 +68,6 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                     maxLength: 20,
                     finishOnKey: '*'
                 });
-                // End the call with <Hangup>
-                twiml.hangup();
                 break;
             default:
                 //Unknown key

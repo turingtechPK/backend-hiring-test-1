@@ -12,6 +12,7 @@ const calls = mongoose.Schema({
     CallSid: {
         type: String,
         required: true,
+        unique:true
     },
     CallStatus: {
         type: String,
