@@ -10,7 +10,7 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 // Auth keys from env
 // const accountSid = process.env.TWILIO_ACCOUNT_SID;
 // const authToken = process.env.TWILIO_AUTH_TOKEN;
-const ngrokURL = 'https://5d8d-39-41-207-231.ngrok-free.app';
+const ngrokURL = 'https://backend-hiring-test-1-production.up.railway.app';
 const forwardNumber = process.env.TWILIO_PHONE_NUMBER;
 // const client = require('twilio')(accountSid, authToken);
 
