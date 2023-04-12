@@ -16,7 +16,7 @@ module.exports = (async function () {
     const incomingCallsRouter = require('../routers/call/incoming-call');
     app.use(incomingCallsRouter);
 
-    //template
+    //view to get activities
     app.get('/',async(req,res)=>{
         let calls = await Calls.find({});
         let vc = await VoicemailCalls.find({});

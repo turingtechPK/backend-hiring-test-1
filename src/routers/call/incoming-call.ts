@@ -58,6 +58,9 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                     action: ngrokURL + '/call/forward_call',
                     method: 'GET'
                 }, forwardNumber);
+                // End the call with <Hangup>
+                twiml.hangup();
+                break;
             case '2':
                 //Record a voicemail
                 twiml.say('Please leave a message at the beep.\nPress the star key when finished.');
@@ -67,6 +70,8 @@ router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
                     maxLength: 20,
                     finishOnKey: '*'
                 });
+                // End the call with <Hangup>
+                twiml.hangup();
                 break;
             default:
                 //Unknown key
@@ -108,44 +113,6 @@ router.get('/call/handle_recording', async (req: ReqType, res: ResTypes) => {
         res.status(400).send(e)
     }
     // console.log(req.query);
-
-});
-//Rounte ro handle the voicemail
-router.get('/call/get_all', async (req: ReqType, res: ResTypes) => {
-
-    try {
-        let calls = await Calls.find({});
-        let vc = await VoicemailCalls.find({});
-        let fc = await ForwardedCalls.find({});
-
-        let forwardedCalls = [];
-        let voicemailCalls = [];
-
-        //forwarded calls
-        for (let i = 0; i < calls.length; i++) {
-            for (let j = 0; j < fc.length; j++) {
-                if (String(calls[i].CallSid) === String(fc[j].CallSid)) {
-                    let combined = { ...calls[i], ...fc[j] }
-                    forwardedCalls.push(combined)
-                }
-            }
-        }
-        for (let i = 0; i < calls.length; i++) {
-            //voicemail calls
-            for (let i = 0; i < calls.length; i++) {
-                for (let j = 0; j < vc.length; j++) {
-                    if (String(calls[i].CallSid) === String(vc[j].CallSid)) {
-                        let combined = { ...calls[i], ...vc[j] }
-                        voicemailCalls.push(combined)
-                    }
-                }
-            }
-        }
-
-        res.status(200).send({ voicemailCalls, forwardedCalls });
-    } catch (e) {
-        res.status(400).send(e);
-    }
 
 });
 module.exports = router;
