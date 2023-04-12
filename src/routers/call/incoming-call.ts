@@ -10,34 +10,34 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 // Auth keys from env
 // const accountSid = process.env.TWILIO_ACCOUNT_SID;
 // const authToken = process.env.TWILIO_AUTH_TOKEN;
- const ngrokURL = 'https://5d8d-39-41-207-231.ngrok-free.app';
- const forwardNumber = process.env.TWILIO_PHONE_NUMBER;
+const ngrokURL = 'https://5d8d-39-41-207-231.ngrok-free.app';
+const forwardNumber = process.env.TWILIO_PHONE_NUMBER;
 // const client = require('twilio')(accountSid, authToken);
 
 
-interface ReqType{
-    body:{
-        Digits:string
-        CallSid:string
+interface ReqType {
+    body: {
+        Digits: string
+        CallSid: string
     },
-    query:{
-        RecordingUrl:string
+    query: {
+        RecordingUrl: string
     }
 }
-interface ResTypes{
-    type:(c:string)=>void;
-    send:(c:string)=>void;
-    status:any
+interface ResTypes {
+    type: (c: string) => void;
+    send: (c: any) => void;
+    status: any
 }
 
-router.post('/call/incoming_call', async (req:ReqType, res:ResTypes) => {
+router.post('/call/incoming_call', async (req: ReqType, res: ResTypes) => {
 
     // Use the Twilio Node.js SDK to build an XML response
     const twiml = new VoiceResponse();
-    
+
     let calls = new Calls(req.body);
     await calls.save();
-    
+
     /** helper function to set up a <Gather> */
     function gather() {
         // Use the <Gather> verb to collect user input
@@ -49,24 +49,24 @@ router.post('/call/incoming_call', async (req:ReqType, res:ResTypes) => {
     }
     // If the user entered digits, process their request
     if (req.body.Digits) {
-        
+
         switch (req.body.Digits) {
             case '1':
                 //Forward call
                 twiml.say('Your call is being forwaded');
                 twiml.dial({
-                    action:ngrokURL+'/call/forward_call',
+                    action: ngrokURL + '/call/forward_call',
                     method: 'GET'
                 }, forwardNumber);
             case '2':
                 //Record a voicemail
                 twiml.say('Please leave a message at the beep.\nPress the star key when finished.');
                 twiml.record({
-                    action: ngrokURL+'/call/handle_recording',
+                    action: ngrokURL + '/call/handle_recording',
                     method: 'GET',
                     maxLength: 20,
                     finishOnKey: '*'
-                });           
+                });
                 break;
             default:
                 //Unknown key
@@ -75,7 +75,7 @@ router.post('/call/incoming_call', async (req:ReqType, res:ResTypes) => {
                 gather();
                 break;
         }
-        
+
     } else {
         // If no input was sent, use the <Gather> verb to collect user input
         gather();
@@ -86,22 +86,66 @@ router.post('/call/incoming_call', async (req:ReqType, res:ResTypes) => {
 });
 
 //Rounte to handle the voicemail
-router.get('/call/forward_call', async (req:ReqType, res:ResTypes) => {
+router.get('/call/forward_call', async (req: ReqType, res: ResTypes) => {
+    try {
         let forwarded_calls = new ForwardedCalls(req.query);
         await forwarded_calls.save();
         let status = 'success';
         res.status(201).send({ forwarded_calls, status });
+    } catch (e) {
+        res.status(400).send(e)
+    }
 });
 
 //Rounte ro handle the voicemail
-router.get('/call/handle_recording', async (req:ReqType, res:ResTypes) => {
+router.get('/call/handle_recording', async (req: ReqType, res: ResTypes) => {
+    try {
         let voicemail_calls = new VoicemailCalls(req.query);
         await voicemail_calls.save();
         let status = 'success';
         res.status(201).send({ voicemail_calls, status });
+    } catch (e) {
+        res.status(400).send(e)
+    }
+    // console.log(req.query);
 
-        // console.log(req.query);
-        
 });
+//Rounte ro handle the voicemail
+router.get('/call/get_all', async (req: ReqType, res: ResTypes) => {
 
+    try {
+        let calls = await Calls.find({});
+        let vc = await VoicemailCalls.find({});
+        let fc = await ForwardedCalls.find({});
+
+        let forwardedCalls = [];
+        let voicemailCalls = [];
+
+        //forwarded calls
+        for (let i = 0; i < calls.length; i++) {
+            for (let j = 0; j < fc.length; j++) {
+                if (String(calls[i].CallSid) === String(fc[j].CallSid)) {
+                    let combined = { ...calls[i], ...fc[j] }
+                    forwardedCalls.push(combined)
+                }
+            }
+        }
+        for (let i = 0; i < calls.length; i++) {
+            //voicemail calls
+            for (let i = 0; i < calls.length; i++) {
+                for (let j = 0; j < vc.length; j++) {
+                    if (String(calls[i].CallSid) === String(vc[j].CallSid)) {
+                        let combined = { ...calls[i], ...vc[j] }
+                        voicemailCalls.push(combined)
+                    }
+                }
+            }
+        }
+
+        res.status(200).send({ voicemailCalls, forwardedCalls });
+    } catch (e) {
+        res.status(400).send(e);
+    }
+
+});
 module.exports = router;

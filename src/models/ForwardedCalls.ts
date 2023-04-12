@@ -9,6 +9,10 @@ const ForwadedCallsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    To: {
+        type: String,
+        required: true,
+    },
 });
 ForwadedCallsSchema.pre('save', async function (next) {
     next();

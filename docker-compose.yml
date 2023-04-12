@@ -16,8 +16,6 @@ services:
     environment:
       PORT: 3000
       MONGODB_URI: mongodb://mongodb:27017/twilo_turing
-      TWILIO_ACCOUNT_SID: AC0e8221ee86f4b3a9d2d42b03fbb81379
-      TWILIO_AUTH_TOKEN: 3ddd137a445b5be18edda875a4697d8a
       TWILIO_PHONE_NUMBER: +15074106840
       NGROK_URL: https://1b84-39-41-207-231.ngrok-free.app
     ports:
