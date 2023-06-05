@@ -1,5 +1,4 @@
 import { TwilioService } from './../twilio/twilio.service';
-import { CallDto } from './call.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Call } from './call.schema';
@@ -37,8 +36,6 @@ export class CallService {
     );
     return this.twilioService.handleIncomingCall(req);
   }
-
-  saveCallLog(CallSid) {}
 
   async handleVoiceMail(req) {
     console.log('req.body', req.body);
