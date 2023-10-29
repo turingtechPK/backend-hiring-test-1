@@ -35,6 +35,6 @@ async function bootstrap() {
       transformOptions: { enableImplicitConversion: true },
     }),
   );
-  await app.listen(configService.get<string>('port') || 3000);
+  await app.listen(+configService.get<number>('port') || 3000);
 }
 bootstrap();

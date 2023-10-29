@@ -29,7 +29,7 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
         transformOptions: { enableImplicitConversion: true },
     }));
-    await app.listen(configService.get('port') || 3000);
+    await app.listen(+configService.get('port') || 3000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
