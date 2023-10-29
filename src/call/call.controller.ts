@@ -5,7 +5,6 @@ import { CallService } from './call.service';
 @Controller('call')
 export class CallController {
   constructor(private callService: CallService) {}
-
   @Post('incoming') //this route will be called when user will call on my twilio number
   handleIncomingCall(@Res() response: Response): void {
     const twiml = this.callService.handleIncomingCall();

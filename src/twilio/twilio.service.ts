@@ -19,12 +19,11 @@ export class TwilioService {
 
   async dialNumber(to: string) {
     try {
-      const response = await this.twilioClient.calls.create({
+      return await this.twilioClient.calls.create({
         url: this.configService.get<string>('twilio.createCallUrl'),
         to,
         from: this.configService.get<string>('twilio.callFromNumber'),
       });
-      return response.sid;
     } catch (error) {
       throw new BadRequestException(error.message);
     }

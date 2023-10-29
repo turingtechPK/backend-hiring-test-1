@@ -16,7 +16,7 @@ export class CallService {
     private twilioService: TwilioService,
   ) {}
 
-  handleIncomingCall() {
+  async handleIncomingCall() {
     try {
       const twiml = new Twilio.twiml.VoiceResponse();
       const gather = twiml.gather({
@@ -48,7 +48,14 @@ export class CallService {
             'twilio.callToNumber',
           );
           const response = await this.twilioService.dialNumber(dialNumber);
-          console.log('Call SID: ', response);
+          if (!response) {
+            throw new Error('Failed to dial number');
+          }
+          const call = new this.callModel({
+            sid: response.sid,
+            status: response.status,
+          });
+          await call.save();
           break;
         }
         case '2': {

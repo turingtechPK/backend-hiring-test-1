@@ -8,10 +8,10 @@ export class Call {
   @Prop({ required: true })
   sid: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   duration: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   voiceMailRecordingUrl: string;
 
   @Prop()
