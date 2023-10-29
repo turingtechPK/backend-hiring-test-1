@@ -21,7 +21,7 @@ export class TwilioService {
     try {
       const response = await this.twilioClient.calls.create({
         url: this.configService.get<string>('twilio.createCallUrl'),
-        to: this.configService.get<string>('twilio.callToNumber'),
+        to,
         from: this.configService.get<string>('twilio.callFromNumber'),
       });
       return response.sid;
