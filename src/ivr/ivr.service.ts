@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { CallLogService } from 'src/calllog/calllog.service';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 @Injectable()
 export class IVRService {
+  constructor(private readonly callLogService: CallLogService) {}
+
   async intro(): Promise<string> {
     const voiceResponse = new VoiceResponse();
     const gather = voiceResponse.gather({
@@ -32,6 +35,15 @@ export class IVRService {
     } else {
       actionResponse = await this.redirectToIntro();
     }
+
+    this.callLogService.createCallLog({
+      to: '',
+      from: '',
+      sid: '',
+      stauts: '',
+      duration: 0,
+      recordingUrl: '',
+    });
 
     return actionResponse;
   }
