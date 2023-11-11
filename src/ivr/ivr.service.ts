@@ -33,6 +33,7 @@ export class IVRService {
         '1',
         this.forwardCall(
           this.configService.get<string>('PERSONAL_NUMBER') ?? '',
+          this.configService.get<string>('TWILIO_NUMBER') ?? '',
         ),
       ],
       ['2', this.recordCall()],
@@ -45,24 +46,26 @@ export class IVRService {
       actionResponse = await this.redirectToIntro();
     }
 
-    this.callLogService.createCallLog({
-      to: '',
-      from: '',
-      sid: '',
-      stauts: '',
-      duration: 0,
-      recordingUrl: '',
-    });
-
     return actionResponse;
   }
 
-  private async forwardCall(number: string): Promise<string> {
+  private async forwardCall(
+    toNumber: string,
+    fromNumber: string,
+  ): Promise<string> {
     const voiceResponse = new VoiceResponse();
     voiceResponse.say(
       'Forwarding your call. You can talk to the receipient of this number at the end of this sentence.',
     );
-    await voiceResponse.dial(number);
+    await voiceResponse.dial(toNumber);
+    await this.callLogService.createCallLog({
+      to: toNumber,
+      from: fromNumber,
+      sid: '',
+      status: '',
+      duration: '0',
+      recordingUrl: '',
+    });
     return voiceResponse.toString();
   }
 
@@ -75,11 +78,20 @@ export class IVRService {
       method: 'POST',
       finishOnKey: '*',
     });
+
     return response.toString();
   }
 
   async recordCallback(body: any): Promise<typeof VoiceResponse> {
     console.log('recording', body);
+    await this.callLogService.createCallLog({
+      to: this.configService.get<string>('PERSONAL_NUMBER') ?? '',
+      from: this.configService.get<string>('TWILIO_NUMBER') ?? '',
+      sid: body.CallSid,
+      status: body.CallStatus,
+      duration: body.RecordingDuration,
+      recordingUrl: body.RecordingUrl,
+    });
     return this.redirectToIntro();
   }
 

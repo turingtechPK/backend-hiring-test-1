@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = ""
+  url      = env("DATABASE_URL")
 }
 
 model Call {
@@ -15,7 +15,7 @@ model Call {
   to           String
   from         String
   sid          String?
-  stauts       String
-  duration     Float
+  status       String
+  duration     String
   recordingUrl String
 }

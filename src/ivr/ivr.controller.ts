@@ -18,6 +18,6 @@ export class IVRController {
 
   @Post('/recording')
   async record(@Body() body: any): Promise<string> {
-    return this.ivrService.recordCallback(body.recordingUrl);
+    return this.ivrService.recordCallback(body);
   }
 }
