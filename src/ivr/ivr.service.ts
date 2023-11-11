@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { CallLogService } from 'src/calllog/calllog.service';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 @Injectable()
 export class IVRService {
-  constructor(private readonly callLogService: CallLogService) {}
+  constructor(
+    private readonly callLogService: CallLogService,
+    private readonly configService: ConfigService,
+  ) {}
 
   async intro(): Promise<string> {
     const voiceResponse = new VoiceResponse();
@@ -25,13 +29,18 @@ export class IVRService {
 
   async menu(digit: string): Promise<any> {
     const menuActions = new Map<string, any>([
-      ['1', this.forwardCall],
-      ['2', this.recordCall],
+      [
+        '1',
+        this.forwardCall(
+          this.configService.get<string>('PERSONAL_NUMBER') ?? '',
+        ),
+      ],
+      ['2', this.recordCall()],
     ]);
 
     let actionResponse = null;
     if (menuActions.has(digit)) {
-      actionResponse = await menuActions.get(digit)();
+      actionResponse = await menuActions.get(digit);
     } else {
       actionResponse = await this.redirectToIntro();
     }
@@ -48,12 +57,12 @@ export class IVRService {
     return actionResponse;
   }
 
-  private async forwardCall(): Promise<string> {
+  private async forwardCall(number: string): Promise<string> {
     const voiceResponse = new VoiceResponse();
     voiceResponse.say(
       'Forwarding your call. You can talk to the receipient of this number at the end of this sentence.',
     );
-    await voiceResponse.dial('+923353722626');
+    await voiceResponse.dial(number);
     return voiceResponse.toString();
   }
 
