@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Call" ALTER COLUMN "duration" SET DATA TYPE TEXT;

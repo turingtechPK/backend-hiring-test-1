@@ -1,70 +1,43 @@
-# TuringTech - Backend technical test (Intermediate)
+## Description
 
-This test is a part of our hiring process for [backend positions](https://www.turingtechnologies.org/careers). It should take you between 2 and 4 hours depending on your experience. We made this task in a way that you'll end up learing how IVRs and Twilio's API works. Working on this task will help you in your future projects.
+The applicate uses [Nest](https://github.com/nestjs/nest) framework with TypeScript to carry out the task. Following commands can be used to run it: 
 
-*Feel free to apply on our [Careers Page](https://www.turing-tech.org/careers?github=true) and email us at hr@turingtechnologies.org.*
+## Installation
 
-## Summary
+```bash
+$ npm install
+```
 
-The purpose of the test is to reproduce one small feature: __call forwarding__.
+## Running the app
 
-Here is the story:
+```bash
+# development
+$ npm run start
 
-Your company has one main number. This number is an [IVR](https://en.wikipedia.org/wiki/Interactive_voice_response):
-- If the caller presses `1`, call is forwarded to another phone number;
-- If the caller presses `2`, he is able to leave a voicemail.
+# watch mode
+$ npm run start:dev
 
-It's 9AM in the office and first calls are coming in!
+# production mode
+$ npm run start:prod
+```
 
-## Instructions
+## License
 
-### Code
+Nest is [MIT licensed](LICENSE).
 
-In order to receive and route calls, you will be creating an interaction with [Twilio](https://twilio.com)'s API.
+## API
 
-Please keep the following points in mind:
+The project consists of the following main apis: 
 
-- The focus of this test is the interaction between your backend server and Twilio - only inbound calls should be handled;
-- In order to test the interaction between Twilio and your local environment, you can use tunnels like [ngrok.com](https://ngrok.com);
-- Register a test account on [Twilio](https://twilio.com) - you'll be able to setup a new account and test phone number for free;
-- You can add all the models you need specially for Call object;
-- Your project must be available online. A simple Heroku Dyno should do the trick;
-- Make your code as clear as possible, it should be understandable at a first glance (comments are more than welcome);
-- You can dd tests in your submission, ONLY if you have extra time.
+### /call
+This API is used to call the twilio US number. Since calling it directly from PK number was not possible so used that. 
 
-### Bonus
+### /ivr/incoming
+This API is the callback against the twilio webhook for incoming call. When a call comes, this hook is hit and it forwards call to menu API. 
 
-- Use Typescript
-- Use NestJS or any other node.js framework
-- Use [OpenAPI/Swagger Docs](https://swagger.io/solutions/api-documentation/) to document your APIs
+### /ivr/menu
+This API returns the call menu against keypad numbers which the programmable voice speaks for caller.
+If user presses 1, call is forwarded to my personal number, if user presses 2 they can record a voice mail.
 
-### Use case
-
-The use case we want to reproduce is the following:
-
-- A customer is calling the main number of your company;
-- If the caller presses `1`, the call is redirected on your personal phone\*. You should be able to pickup and talk with the caller.
-- If the caller presses `2`, he can drop a voicemail (you would like to hear this message later);
-- The call has to be logged in the database;
-- An activity feed, listing all calls, should be displayed: status of the call, duration, link to an audio file if the caller dropped a voicemail plus other info you have in mind.
-
-### Main steps
-
-Here are some steps to help you start:
-
-- [ ] Create a Twilio account and read carefully the API doc.
-
-- [ ] Buy a Number on Twilio and try to call it.
-
-- [ ] Create an `Application` and Twilio tools you will use for calls.
-
-- [ ] Create the `Call` model in order to store data about calls.
-
-- [ ] Forward incoming calls according to the previous strategies.
-
-
-
-## Code Submit
-Please organize, design, test and document your code as if it were going into production, create a loom video and send us a [pull request](https://opensource.com/article/19/7/create-pull-request-github). 
-
-We will review it and get back to you in order to talk about your code! 
+### /ivr/recording
+This API is the callback of voice record. Once user records a voice message it is recieved here and we can store it to db. 
