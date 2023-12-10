@@ -13,8 +13,7 @@
     "basePath": "/call",
     "tags": [
         {
-            "name": "Calls",
-            "description": "Initiate call to the company number"
+            "name": "Twilio Calls"
         }
     ],
     "schemes": [
