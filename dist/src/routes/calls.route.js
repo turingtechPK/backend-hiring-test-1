@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const Call_1 = require("../controller/calls/Call");
+const callRoutes = (0, express_1.Router)();
+callRoutes.post("/incoming", Call_1.incomingCalls);
+callRoutes.post("/gather", Call_1.gatherInput);
+callRoutes.post("/save/voicemail", Call_1.voiceMail);
+callRoutes.post("/save/voice", Call_1.voice);
+exports.default = callRoutes;
