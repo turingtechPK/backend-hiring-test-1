@@ -112,7 +112,7 @@ export const gatherInput: RequestHandler = async (req, res, next) => {
 export const getAllCallLogs: RequestHandler = async (req, res, next) => {
     try {
         const calls = await Call.find()
-        res.send({
+        res.status(200).send({
             calls: calls
         })
     } catch (error) {

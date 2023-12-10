@@ -1,0 +1,57 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Turing Technology Assessment",
+        "description": "Turing Technology Assessment API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "twilio-calls-app-f24750d55dd9.herokuapp.com",
+    "basePath": "/call",
+    "tags": [
+        {
+            "name": "Calls",
+            "description": "Initiate call to the company number"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/incoming": {
+            "post": {
+                "tags": [
+                    "Initiate a Call"
+                ],
+                "description": "Initiate a call to company number.",
+                "responses": {
+                    "200": {
+                        "description": "Call is recorded or forwarded based on the option selected from the initial call to the company"
+                    }
+                }
+            }
+        },
+        "/get/all": {
+            "get": {
+                "tags": [
+                    "Call Logs"
+                ],
+                "summary": "Get call logs",
+                "responses": {
+                    "200": {
+                        "description": "Call logs found"
+                    }
+                }
+            }
+        }
+    }
+}
