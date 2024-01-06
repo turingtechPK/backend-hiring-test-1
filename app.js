@@ -61,7 +61,7 @@ app.post('/voice', (req, res) => {
  *         description: Successful response
  */
 app.post('/handle-key', (req, res) => {
-  const digitPressed = '1';
+  const digitPressed = req.body.Digits;
   const twiml = new twilio.twiml.VoiceResponse();
   if (digitPressed === '1') {
     // Redirect call to personal number using TwiML
