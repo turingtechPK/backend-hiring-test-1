@@ -8,7 +8,6 @@ const app = express();
 const port =  8080;
 const {voice_recordings} = require('./models')
 const db = require('./models/index')
-const functions = require('firebase-functions')
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +36,6 @@ const twilioClient = twilio(accountSid, authToken);
  */
 app.post('/voice', (req, res) => {
   const twiml = new twilio.twiml.VoiceResponse();
-console.log("_________________it's comgi here")
   const gather = twiml.gather({
     numDigits: 1,
     action: '/handle-key',
@@ -143,4 +141,3 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-exports.api = functions.https.onRequest(app)
