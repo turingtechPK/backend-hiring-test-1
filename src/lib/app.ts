@@ -15,22 +15,7 @@ connection();
 app.use(middlewares);
 
 //ALL THE API ROUTES
-
-/**
- * @swagger
- * /:
- *  get:
- *    summary: Use to test the server
- *    description: Test the server if its running or not
- *    responses:
- *      '200':
- *            description: A successful response
- */
-app.get("/", (req: Request, res: Response) => {
-  res.send("App Running");
-});
-
-app.use("/api/", router);
+app.use("/", router);
 
 
 // CORS
