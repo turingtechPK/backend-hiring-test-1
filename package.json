@@ -29,6 +29,7 @@
     "nodemon": "^2.0.22",
     "swagger-jsdoc": "6.0.0",
     "swagger-ui-express": "4.1.6",
+    "twilio": "^4.21.0",
     "winston": "^3.11.0"
   }
 }
