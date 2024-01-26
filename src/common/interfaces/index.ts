@@ -90,9 +90,14 @@ export enum HttpStatus {
 
 export interface HandleUserInputBody {
   Digits: string;
+  callId: string;
 }
 
 export interface HandleVoicemailBody {
   RecordingUrl: string;
+  CallSid: string;
+}
+
+export interface HandleCallEndBody {
   CallSid: string;
 }
