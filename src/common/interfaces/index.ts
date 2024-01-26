@@ -87,3 +87,12 @@ export enum HttpStatus {
   GATEWAY_TIMEOUT = 504,
   HTTP_VERSION_NOT_SUPPORTED = 505,
 }
+
+export interface HandleUserInputBody {
+  Digits: string;
+}
+
+export interface HandleVoicemailBody {
+  RecordingUrl: string;
+  CallSid: string;
+}
