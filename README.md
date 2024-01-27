@@ -8,9 +8,9 @@ The project includes features such as logging calls in a database, tracking call
 # Prerequisites
 Before you begin, make sure you have the following:
 
-# Node.js installed
-# npm (Node Package Manager) installed
-# MongoDB installed and running (if using MongoDB)
+Node.js installed
+npm (Node Package Manager) installed
+ MongoDB installed and running (if using MongoDB)
 
 # Getting Started
 Follow these steps to set up and run the project:
