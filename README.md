@@ -18,7 +18,7 @@ Follow these steps to set up and run the project:
 # Clone the Repository:
 
 
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/RehanMaroof/backend-hiring-test.git
 cd your-repo
 
 # Install Dependencies:
