@@ -1,70 +1,86 @@
-# TuringTech - Backend technical test (Intermediate)
+# Twilio Call Forwarding and Voicemail System
+This project implements a Twilio-powered call forwarding and voicemail system. It allows a customer to call the main number of your company and choose between two options:
 
-This test is a part of our hiring process for [backend positions](https://www.turingtechnologies.org/careers). It should take you between 2 and 4 hours depending on your experience. We made this task in a way that you'll end up learing how IVRs and Twilio's API works. Working on this task will help you in your future projects.
+Press 1: Forward the call to your personal phone.
+Press 2: Leave a voicemail for later listening.
+The project includes features such as logging calls in a database, tracking call duration, and displaying an activity feed.
 
-*Feel free to apply on our [Careers Page](https://www.turing-tech.org/careers?github=true) and email us at hr@turingtechnologies.org.*
+# Prerequisites
+Before you begin, make sure you have the following:
 
-## Summary
+Node.js installed
+npm (Node Package Manager) installed
+ MongoDB installed and running (if using MongoDB)
 
-The purpose of the test is to reproduce one small feature: __call forwarding__.
+# Getting Started
+Follow these steps to set up and run the project:
 
-Here is the story:
-
-Your company has one main number. This number is an [IVR](https://en.wikipedia.org/wiki/Interactive_voice_response):
-- If the caller presses `1`, call is forwarded to another phone number;
-- If the caller presses `2`, he is able to leave a voicemail.
-
-It's 9AM in the office and first calls are coming in!
-
-## Instructions
-
-### Code
-
-In order to receive and route calls, you will be creating an interaction with [Twilio](https://twilio.com)'s API.
-
-Please keep the following points in mind:
-
-- The focus of this test is the interaction between your backend server and Twilio - only inbound calls should be handled;
-- In order to test the interaction between Twilio and your local environment, you can use tunnels like [ngrok.com](https://ngrok.com);
-- Register a test account on [Twilio](https://twilio.com) - you'll be able to setup a new account and test phone number for free;
-- You can add all the models you need specially for Call object;
-- Your project must be available online. A simple Heroku Dyno should do the trick;
-- Make your code as clear as possible, it should be understandable at a first glance (comments are more than welcome);
-- You can dd tests in your submission, ONLY if you have extra time.
-
-### Bonus
-
-- Use Typescript
-- Use NestJS or any other node.js framework
-- Use [OpenAPI/Swagger Docs](https://swagger.io/solutions/api-documentation/) to document your APIs
-
-### Use case
-
-The use case we want to reproduce is the following:
-
-- A customer is calling the main number of your company;
-- If the caller presses `1`, the call is redirected on your personal phone\*. You should be able to pickup and talk with the caller.
-- If the caller presses `2`, he can drop a voicemail (you would like to hear this message later);
-- The call has to be logged in the database;
-- An activity feed, listing all calls, should be displayed: status of the call, duration, link to an audio file if the caller dropped a voicemail plus other info you have in mind.
-
-### Main steps
-
-Here are some steps to help you start:
-
-- [ ] Create a Twilio account and read carefully the API doc.
-
-- [ ] Buy a Number on Twilio and try to call it.
-
-- [ ] Create an `Application` and Twilio tools you will use for calls.
-
-- [ ] Create the `Call` model in order to store data about calls.
-
-- [ ] Forward incoming calls according to the previous strategies.
+# Clone the Repository:
 
 
+git clone https://github.com/RehanMaroof/backend-hiring-test.git
+cd your-repo
 
-## Code Submit
-Please organize, design, test and document your code as if it were going into production, create a loom video and send us a [pull request](https://opensource.com/article/19/7/create-pull-request-github). 
+# Install Dependencies:
 
-We will review it and get back to you in order to talk about your code! 
+
+npm install
+
+# Configure Twilio:
+
+Create a Twilio account if you don't have one.
+Obtain your Twilio Account SID, Auth Token, and purchase a Twilio phone number.
+Update the config.js file with your Twilio credentials.
+Configure Database (if using MongoDB):
+
+If using MongoDB, replace 'YOUR_MONGODB_URI' in server.js with your actual MongoDB connection URI.
+
+# Run the Server:
+
+npm start
+
+# Expose Locally with ngrok (for testing Twilio webhooks):
+
+Download and install ngrok.
+#Expose your local server to the internet:
+
+ngrok http 3000
+
+Update your Twilio phone number's webhook URLs with the ngrok URLs.
+
+# Test the Application:
+
+Call your Twilio phone number and test the call forwarding and voicemail features.
+Access the activity feed by visiting http://localhost:3000/activity-feed in your browser.
+
+# Project Structure
+src/controllers/:
+
+twilioController.js: Handles incoming calls and forwards them based on user input.
+voicemailController.js: Handles voicemail recording callbacks.
+src/models/:
+
+callModel.js: Defines the MongoDB schema for storing call information.
+src/routes/:
+
+index.js: Defines routes including Twilio webhook endpoints and the activity feed endpoint.
+src/server.js:
+
+Main server file that sets up Express and defines the server logic.
+src/config.js:
+
+Configuration file for storing Twilio credentials.
+src/controllers/activityFeedController.js:
+
+Controller for retrieving the activity feed from the database.
+
+# Additional Information
+The duration of each call is tracked and stored in the database.
+Voicemail audio links are saved, allowing you to listen to voicemails later.
+The activity feed provides information on each call, including status, duration, and voicemail audio links.
+
+# Contributing
+Feel free to contribute to the project by submitting issues or pull requests. Your contributions are welcome!
+
+# License
+This project is licensed under the MIT License.
