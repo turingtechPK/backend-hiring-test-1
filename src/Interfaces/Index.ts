@@ -1,4 +1,4 @@
-import { IRecording } from 'src/Interfaces/recording.interface';
+import { IRecording } from './recording.interface';
 import { ICall } from './call.model.interface';
 export {
     ICall,
