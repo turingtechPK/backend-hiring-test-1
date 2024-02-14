@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { ICall, IRecording } from 'src/Interfaces';
+import { ICall } from '../Interfaces';
 
 /**
  * Returns an ICall object with appended recording and duration if available.
