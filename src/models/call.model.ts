@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { IRecording } from 'src/Interfaces';
-import { toJSON } from 'src/plugins';
+import { IRecording } from '../Interfaces';
+import { toJSON } from '../plugins';
 
 @Schema()
 export class Call {
